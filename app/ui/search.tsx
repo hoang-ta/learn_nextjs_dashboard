@@ -15,7 +15,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     urlParams.set("page", "1");
     replace(`${pathname}?${urlParams.toString()}`);
   }, 500);
-  console.log(typeof searchParams.get("query"));
+  // console.log("query: ", typeof searchParams.get("query"));
   return (
     <div className="relative flex flex-1 flex-shrink-0">
       <label htmlFor="search" className="sr-only">

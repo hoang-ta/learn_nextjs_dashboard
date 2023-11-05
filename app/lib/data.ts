@@ -20,12 +20,12 @@ export async function fetchRevenue() {
     // Artificially delay a reponse for demo purposes.
     // Don't do this in real life :)
 
-    console.log("Fetching revenue data...");
+    // console.log("Fetching revenue data...");
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    console.log("Data fetch complete after 3 seconds.");
+    // console.log("Data fetch complete after 3 seconds.");
 
     return data.rows;
   } catch (error) {
@@ -57,7 +57,7 @@ export async function fetchLatestInvoices() {
 }
 
 export async function fetchCardData() {
-  noStore();
+  // noStore();
   try {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
