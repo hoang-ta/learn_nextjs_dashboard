@@ -15,18 +15,33 @@ const InvoiceSchema = z.object({
 const CreateInvoice = InvoiceSchema.omit({ id: true, date: true });
 
 export const createInvoice = async (formData: FormData) => {
-  const { customerId, amount, status } = CreateInvoice.parse({
-    customerId: formData.get("customerId"),
-    amount: formData.get("amount"),
-    status: formData.get("status"),
-  });
-  const amountInCents = amount * 100;
-  const date = new Date().toISOString().split("T")[0];
-  await sql`
-    INSERT INTO invoices (customer_id, amount, status, date)
-    VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
-  `;
-  console.log("done: ");
+  try {
+    throw new Error("test");
+    const { customerId, amount, status } = CreateInvoice.parse({
+      customerId: formData.get("customerId"),
+      amount: formData.get("amount"),
+      status: formData.get("status"),
+    });
+    const amountInCents = amount * 100;
+    const date = new Date().toISOString().split("T")[0];
+    await sql`
+      INSERT INTO invoices (customer_id, amount, status, date)
+      VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
+    `;
+  } catch (error: any) {
+    // return error;
+    // Or
+    // return {
+    //   message: error,
+    // };
+    // Or
+    return {
+      message: new Error("internal"),
+    };
+    // return {
+    //   message: "internal server error",
+    // };
+  }
   revalidatePath("/dashboard/invoices");
   redirect("/dashboard/invoices");
 };

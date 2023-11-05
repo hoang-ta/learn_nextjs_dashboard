@@ -20,6 +20,7 @@ export default async function Page() {
   // } = await fetchCardData();
 
   // console.log(revenue);
+  // throw new Error("fadasdas");
 
   return (
     <main>
